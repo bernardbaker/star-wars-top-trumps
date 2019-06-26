@@ -1,3 +1,5 @@
+@import "./scss/variables.scss";
+
 .App {
   text-align: center;
 }
@@ -9,7 +11,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: $primaryColor;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
