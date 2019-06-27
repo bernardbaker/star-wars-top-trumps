@@ -31,7 +31,6 @@ class Deck extends Component {
     const deck = list.map((item, index) => {
       return (
         <Swipe
-          onSwipeStart={this.onSwipeStart}
           onSwipeMove={this.onSwipeMove}
           onSwipeEnd={this.onSwipeEnd}
           allowMouseEvents
@@ -51,15 +50,11 @@ class Deck extends Component {
     }
   };
 
-  onSwipeStart = event => {
-    console.log("Start swiping...", event);
-  };
-
   onSwipeMove = (position, event) => {
     if (this._swiping === false) {
       if (position.x > 100) {
         this._swiping = true;
-        console.log(`Moved ${position.x} pixels horizontally`, event);
+
         for (let i = 0; i < event.path.length; i++) {
           if (
             event.path[i].className &&
@@ -69,7 +64,6 @@ class Deck extends Component {
 
             node.classList.remove("animate-swipe-right-in");
             node.classList.add("animate-swipe-right-out");
-            console.dir(node);
 
             setTimeout(() => {
               node.classList.remove("animate-swipe-right-out");
@@ -77,7 +71,6 @@ class Deck extends Component {
               setTimeout(() => {
                 if (this._count !== this._length) {
                   this._count++;
-                  console.log(`Count: ${this._count}`);
                 }
                 if (this._count === this._length) {
                   let nodeReferences = document.querySelectorAll(
@@ -99,7 +92,6 @@ class Deck extends Component {
   };
 
   onSwipeEnd = event => {
-    console.log("End swiping...", event);
     this._swiping = false;
   };
 
