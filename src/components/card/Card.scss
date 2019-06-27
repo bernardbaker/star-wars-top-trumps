@@ -1,0 +1,92 @@
+.card-container {
+  position: absolute;
+
+  background-image: url(./assets/card_background.jpg);
+
+  background-size: cover;
+
+  border-radius: 2em;
+
+  .card {
+    border: 1px solid rgba(255, 255, 0, 0.3);
+
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+
+    width: calc(30vw);
+
+    min-width: 400px;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    cursor: pointer;
+
+    border-radius: 2em;
+
+    padding-bottom: 4.5em;
+
+    background-image: url(../../assets/star_wars_logo_small.png);
+
+    background-repeat: no-repeat;
+
+    background-position-x: 50%;
+
+    background-position-y: calc(100% - 5px);
+
+    @media all and (max-width: 500px) {
+      width: calc(60vw);
+      min-width: 300px;
+    }
+
+    ul {
+      list-style: none;
+
+      padding: 0;
+
+      margin: 0.5em;
+
+      li {
+        margin-bottom: 0.5em;
+
+        &:hover {
+          font-weight: 700;
+        }
+      }
+
+      .detail {
+        display: flex;
+
+        flex-direction: column;
+
+        background-color: rgba(0, 0, 0, 0.4);
+
+        border-radius: 0.25em;
+
+        border-bottom: dotted 0.1em rgba(255, 255, 0, 0.2);
+
+        &:hover {
+          animation: change-background-color 0.5s;
+
+          @keyframes change-background-color {
+            to {
+              background-color: rgba(0, 0, 0, 0.7);
+            }
+          }
+        }
+
+        p {
+          margin: 0;
+
+          text-align: center;
+
+          color: rgba(255, 200, 100, 0.8);
+
+          font-weight: 700;
+
+          &:last-child {
+            color: rgba(255, 255, 255, 0.8);
+          }
+        }
+      }
+    }
+  }
+}
