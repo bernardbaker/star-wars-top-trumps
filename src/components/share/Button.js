@@ -35,6 +35,7 @@ export class Button extends Component {
   playAudio = () => {
     if (!document.getElementById("audio-share-button")) {
       let player = document.createElement("audio");
+      player.setAttribute("data-testid", "audio-share-button");
       player.setAttribute("id", "audio-share-button");
       player.src = audioFileForceWillBeWithYou;
       player.style.visibility = "hidden";
