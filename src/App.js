@@ -11,6 +11,7 @@ const LazyCard = React.lazy(() =>
 const playAudio = () => {
   if (!document.getElementById("audio-theme-song")) {
     let player = document.createElement("audio");
+    player.setAttribute("data-testid", "audio-theme-song");
     player.setAttribute("id", "audio-theme-song");
     player.src = audioFileStarWarsThemeSong;
     player.play();
@@ -40,7 +41,7 @@ class App extends Component {
     return (
       <>
         <Router>
-          <div className="app" id="app" onClick={playAudio}>
+          <div className="app" id="app" data-testid="app" onClick={playAudio}>
             <Route exact strict path="/" component={Deck} />
             <Route exact path="/share/:id" component={SingleCardDeck} />
           </div>
