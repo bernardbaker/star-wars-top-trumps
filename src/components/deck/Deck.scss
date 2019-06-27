@@ -1,13 +1,27 @@
 .deck {
   position: absolute;
 
-  top: calc(5vh);
+  top: calc(2vh);
 
   left: calc(50vw - 200px);
 
   font-size: small;
 
   user-select: none;
+
+  transform: translateY(3vh);
+
+  animation: animate-deck-into-view 1.5s ease-out;
+
+  @keyframes animate-deck-into-view {
+    from {
+      transform: translateY(100vh);
+    }
+
+    to {
+      transform: translateY(3vh);
+    }
+  }
 
   @media all and (max-width: 500px) {
     left: calc(50vw - 150px);

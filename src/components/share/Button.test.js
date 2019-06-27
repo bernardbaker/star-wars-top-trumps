@@ -40,15 +40,4 @@ describe("<ShareButton/>", () => {
     // Assert
     expect(result).toBe(expected);
   });
-
-  it("should call a function when clicked", () => {
-    // Arrange
-    global.alert = jest.fn();
-    // Act
-    const { getByTestId } = render(<ShareButton />);
-    const node = getByTestId(/link/);
-    fireEvent.click(node);
-    // Assert
-    expect(global.alert).toHaveBeenCalledTimes(1);
-  });
 });
