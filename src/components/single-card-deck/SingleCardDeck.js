@@ -10,8 +10,9 @@ class SingleCardDeck extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck: []
+      card: []
     };
+    console.log("props", props);
   }
 
   componentDidMount() {
@@ -24,11 +25,13 @@ class SingleCardDeck extends Component {
   }
 
   renderDeck = async () => {
+    console.log(this.props.id);
     const item = await singleStarShip(this.props.id);
-    const card = <Card {...item} />;
+    console.log(item);
+    const card = <Card key={`card-0`} {...item} />;
     if (this._isMounted === true) {
       this.setState({
-        card
+        card: [card]
       });
     }
   };
