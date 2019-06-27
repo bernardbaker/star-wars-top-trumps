@@ -7,6 +7,12 @@
 
   border-radius: 2em;
 
+  -webkit-tap-highlight-color: transparent;
+
+  @media all and (max-width: 500px) {
+    background-position: -80px;
+  }
+
   .card {
     border: 1px solid rgba(255, 255, 0, 0.3);
 
