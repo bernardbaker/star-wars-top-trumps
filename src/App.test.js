@@ -1,12 +1,14 @@
 import React from "react";
 import App from "./App";
 import { render, waitForElement } from "@testing-library/react";
+import "@testing-library/react/cleanup-after-each";
 
 describe("<App/>", () => {
-  it("renders default boilerplate text", async () => {
+  it("renders a list of cards", async () => {
     // Act
-    const { getByText } = render(<App />);
+    const { getAllByTestId } = render(<App />);
     // Assert
-    await waitForElement(() => getByText(/learn react/i));
+    const cards = await waitForElement(() => getAllByTestId(/card/i));
+    expect(cards.length).toBe(10);
   });
 });
