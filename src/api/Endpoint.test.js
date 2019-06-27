@@ -1,6 +1,4 @@
-import React from "react";
-import { listOfStarShips } from "./Endpoint";
-import { render, waitForElement } from "@testing-library/react";
+import { listOfStarShips, singleStarShip } from "./Endpoint";
 
 describe("Endpoint", () => {
   it("should return an array of the first ten results", async () => {
@@ -9,5 +7,14 @@ describe("Endpoint", () => {
     // Assert
     expect(list).toBeDefined();
     expect(list.length).toBe(10);
+  });
+
+  it("should return a single result", async () => {
+    // Arrange
+    const id = 2;
+    // Act
+    const list = await singleStarShip(id);
+    // Assert
+    expect(list).toBeDefined();
   });
 });

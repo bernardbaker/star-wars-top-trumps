@@ -1,14 +1,14 @@
 import React from "react";
-import App from "./App";
+import SingleCardDeck from "./SingleCardDeck";
 import { render, waitForElement } from "@testing-library/react";
 import "@testing-library/react/cleanup-after-each";
 
-describe("<App/>", () => {
-  it("renders a list of cards", async () => {
+describe("<SingleCardDeck/>", () => {
+  it("render a single card", async () => {
     // Act
-    const { getAllByTestId } = render(<App />);
+    const { getAllByTestId } = render(<SingleCardDeck />);
     // Assert
     const cards = await waitForElement(() => getAllByTestId(/card/i));
-    expect(cards.length).toBe(10);
+    expect(cards.length).toBe(1);
   });
 });

@@ -1,12 +1,12 @@
 import React from "react";
-import App from "./App";
+import Deck from "./Deck";
 import { render, waitForElement } from "@testing-library/react";
 import "@testing-library/react/cleanup-after-each";
 
-describe("<App/>", () => {
+describe("<Deck/>", () => {
   it("renders a list of cards", async () => {
     // Act
-    const { getAllByTestId } = render(<App />);
+    const { getAllByTestId } = render(<Deck />);
     // Assert
     const cards = await waitForElement(() => getAllByTestId(/card/i));
     expect(cards.length).toBe(10);
