@@ -1,0 +1,15 @@
+.deck {
+  position: absolute;
+
+  top: calc(5vh);
+
+  left: calc(50vw - 200px);
+
+  font-size: small;
+
+  user-select: none;
+
+  @media all and (max-width: 500px) {
+    left: calc(50vw - 150px);
+  }
+}
