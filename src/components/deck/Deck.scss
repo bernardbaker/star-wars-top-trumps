@@ -1,0 +1,66 @@
+.deck {
+  position: absolute;
+
+  top: calc(2vh);
+
+  left: calc(50vw - 200px);
+
+  font-size: small;
+
+  user-select: none;
+
+  transform: translateY(3vh);
+
+  animation: animate-deck-into-view 1.5s ease-out;
+
+  @keyframes animate-deck-into-view {
+    from {
+      transform: translateY(100vh);
+    }
+
+    to {
+      transform: translateY(3vh);
+    }
+  }
+
+  @media all and (max-width: 500px) {
+    left: calc(50vw - 150px);
+  }
+
+  .swipeable-card {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .animate-swipe-right-out {
+    transform: translateX(500px);
+
+    animation: swipe-right-out 1s;
+
+    @keyframes swipe-right-out {
+      from {
+        transform: translateX(0px);
+      }
+      to {
+        transform: translateX(500px);
+      }
+    }
+  }
+
+  .animate-swipe-right-in {
+    transform: translateX(0px);
+
+    animation: swipe-right-in 1s;
+
+    z-index: 1;
+
+    @keyframes swipe-right-in {
+      from {
+        transform: translateX(500px);
+      }
+      to {
+        transform: translateX(0px);
+      }
+    }
+  }
+}
