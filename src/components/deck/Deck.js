@@ -29,14 +29,19 @@ class Deck extends Component {
   renderDeck = async () => {
     const list = await listOfStarShips();
     const deck = list.map((item, index) => {
+      this.myRef = React.createRef();
       return (
         <Swipe
-          onSwipeMove={this.onSwipeMove}
+          onSwipeMove={(position, event) =>
+            this.handleOnSwipeMove(position, event, `swipeable-card-${index}`)
+          }
           onSwipeEnd={this.onSwipeEnd}
           allowMouseEvents
           key={`card-${index}`}
           className="swipeable-card"
           data-node-id="swipeable-item"
+          data-node-reference={`swipeable-card-${index}`}
+          ref={this.myRef}
         >
           <Card {...item} />
         </Swipe>
@@ -50,43 +55,38 @@ class Deck extends Component {
     }
   };
 
-  onSwipeMove = (position, event) => {
+  handleOnSwipeMove = (position, event, reference) => {
+    this.onSwipeMove(position, event, reference);
+  };
+
+  onSwipeMove = (position, event, reference) => {
     if (this._swiping === false) {
       if (position.x > 100) {
         this._swiping = true;
 
-        for (let i = 0; i < event.path.length; i++) {
-          if (
-            event.path[i].className &&
-            event.path[i].className.toString().indexOf("swipeable-card") !== -1
-          ) {
-            let node = event.path[i];
+        let node = document.querySelector(`[data-node-reference=${reference}]`);
 
-            node.classList.remove("animate-swipe-right-in");
-            node.classList.add("animate-swipe-right-out");
+        node.classList.remove("animate-swipe-right-in");
+        node.classList.add("animate-swipe-right-out");
 
-            setTimeout(() => {
-              node.classList.remove("animate-swipe-right-out");
-              node.classList.add("animate-swipe-right-in");
-              setTimeout(() => {
-                if (this._count !== this._length) {
-                  this._count++;
-                }
-                if (this._count === this._length) {
-                  let nodeReferences = document.querySelectorAll(
-                    '[data-node-id="swipeable-item"]'
-                  );
-                  for (let j = 0; j < nodeReferences.length; j++) {
-                    nodeReferences[j].classList.remove(
-                      "animate-swipe-right-in"
-                    );
-                  }
-                  this._count = 0;
-                }
-              }, 1000);
-            }, 1000);
-          }
-        }
+        setTimeout(() => {
+          node.classList.remove("animate-swipe-right-out");
+          node.classList.add("animate-swipe-right-in");
+          setTimeout(() => {
+            if (this._count !== this._length) {
+              this._count++;
+            }
+            if (this._count === this._length) {
+              let nodeReferences = document.querySelectorAll(
+                '[data-node-id="swipeable-item"]'
+              );
+              for (let j = 0; j < nodeReferences.length; j++) {
+                nodeReferences[j].classList.remove("animate-swipe-right-in");
+              }
+              this._count = 0;
+            }
+          }, 1000);
+        }, 1000);
       }
     }
   };
