@@ -9,5 +9,5 @@ export const listOfStarShips = async () => {
 export const singleStarShip = async id => {
   const response = await fetch(`https://swapi.co/api/starships/${id}/`);
   const json = await response.json();
-  return json.results ? json.results : [];
+  return json ? json : {};
 };
