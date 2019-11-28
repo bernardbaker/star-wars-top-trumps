@@ -96,7 +96,11 @@ class Deck extends Component {
   };
 
   render() {
-    return <div className="deck">{this.state.deck}</div>;
+    return this._isMounted ? (
+      <div className="deck">{this.state.deck}</div>
+    ) : (
+      <h1 className="loading">LOADING</h1>
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./Button.scss";
 import propTypes from "prop-types";
 import audioFileForceWillBeWithYou from "./assets/force-will-be-with-you.mp3";
@@ -8,31 +8,23 @@ export const createShareLink = ({ url, uri }) => {
   return uri.concat(tokens[tokens.length - 2]);
 };
 
-export const displayShareLink = props => {
+export const displayShareLink = ({ url, uri }) => {
   const address = window.location.protocol.concat(window.location.host);
-  return `${address}${createShareLink(props)}`;
+  return `${address}${createShareLink({ url, uri })}`;
 };
 
-export class Button extends Component {
-  constructor(props) {
-    super(props);
+export const Button = ({ label, url, uri }) => {
+  const [shareLink, setShareLink] = useState("");
 
-    this.state = {
-      shareLink: ""
-    };
-  }
+  const handleClick = ({ url, uri }) => {
+    const link = displayShareLink({ url, uri });
 
-  handleClick = props => {
-    const shareLink = displayShareLink(props);
+    playAudio();
 
-    this.playAudio();
-
-    this.setState({
-      shareLink
-    });
+    setShareLink(link);
   };
 
-  playAudio = () => {
+  const playAudio = () => {
     if (!document.getElementById("audio-share-button")) {
       let player = document.createElement("audio");
       player.setAttribute("data-testid", "audio-share-button");
@@ -47,19 +39,17 @@ export class Button extends Component {
     }
   };
 
-  render() {
-    return (
-      <div className="button">
-        <div data-testid="link" onClick={e => this.handleClick(this.props)}>
-          <p className="label">{this.props.label}</p>
-        </div>
-        <div>
-          <p className="share-link">{this.state.shareLink}</p>
-        </div>
+  return (
+    <div className="button">
+      <div data-testid="link" onClick={e => handleClick({ url, uri })}>
+        <p className="label">{label}</p>
       </div>
-    );
-  }
-}
+      <div>
+        <p className="share-link">{shareLink}</p>
+      </div>
+    </div>
+  );
+};
 
 Button.defaultProps = {
   label: "share",

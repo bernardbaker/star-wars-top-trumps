@@ -2,7 +2,6 @@ import React from "react";
 import App from "./App";
 import { render, waitForElement, fireEvent } from "@testing-library/react";
 import "@testing-library/react/cleanup-after-each";
-import { JestEnvironment } from "@jest/environment";
 
 describe("<App/>", () => {
   it("renders a list of cards", async () => {

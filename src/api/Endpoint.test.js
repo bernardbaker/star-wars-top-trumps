@@ -7,7 +7,7 @@ describe("Endpoint", () => {
     // Assert
     expect(list).toBeDefined();
     expect(list.length).toBe(10);
-  });
+  }, 20000);
 
   it("should return a single result", async () => {
     // Arrange
@@ -16,5 +16,5 @@ describe("Endpoint", () => {
     const list = await singleStarShip(id);
     // Assert
     expect(list).toBeDefined();
-  });
+  }, 20000);
 });
