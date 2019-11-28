@@ -3,6 +3,14 @@ import "./Button.scss";
 import propTypes from "prop-types";
 import audioFileForceWillBeWithYou from "./assets/force-will-be-with-you.mp3";
 
+const shareData = url => {
+  return {
+    title: "💫Star Wars 🚀Top Trumps✨",
+    text: "Share the force",
+    url: url
+  };
+};
+
 export const createShareLink = ({ url, uri }) => {
   const tokens = url.split("/");
   return uri.concat(tokens[tokens.length - 2]);
@@ -16,12 +24,20 @@ export const displayShareLink = ({ url, uri }) => {
 export const Button = ({ label, url, uri }) => {
   const [shareLink, setShareLink] = useState("");
 
-  const handleClick = ({ url, uri }) => {
+  const handleClick = async ({ url, uri }) => {
     const link = displayShareLink({ url, uri });
 
     playAudio();
 
     setShareLink(link);
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData(url));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const playAudio = () => {
