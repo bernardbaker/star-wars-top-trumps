@@ -1,49 +1,42 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./SingleCardDeck.scss";
 import { singleStarShip } from "../../api/Endpoint";
 import { Card } from "../card/Card";
 import propTypes from "prop-types";
 
-class SingleCardDeck extends Component {
-  _isMounted = false;
+const SingleCard = ({ id }) => {
+  const [mounted, setMounted] = useState();
+  const [data, setData] = useState();
+  const [card, setCard] = useState();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      card: []
-    };
-  }
+  useEffect(() => {
+    (async () => {
+      const item = await singleStarShip(id);
+      setData(item);
+      setMounted(true);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  componentDidMount() {
-    this._isMounted = true;
-    this.renderDeck();
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  renderDeck = async () => {
-    const item = await singleStarShip(this.props.id);
-    const card = <Card key={`card-0`} {...item} />;
-    if (this._isMounted === true) {
-      this.setState({
-        card: [card]
-      });
+  useEffect(() => {
+    if (mounted && data) {
+      setCard(<Card key={`card-0`} {...data} />);
     }
-  };
+  }, [mounted, data]);
 
-  render() {
-    return <div className="deck">{this.state.card}</div>;
-  }
-}
+  return mounted ? (
+    <div className="deck">{card}</div>
+  ) : (
+    <h1 className="loading">LOADING</h1>
+  );
+};
 
-SingleCardDeck.defaultProps = {
+SingleCard.defaultProps = {
   id: "2"
 };
 
-SingleCardDeck.propTypes = {
+SingleCard.propTypes = {
   id: propTypes.string.isRequired
 };
 
-export default SingleCardDeck;
+export default SingleCard;
